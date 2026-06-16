@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FileText, FileEdit, BarChart2, Target, MessageSquare, Archive, ChevronDown } from 'lucide-react';
+import { FileText, FileEdit, BarChart2, Target, MessageSquare, Archive, ChevronDown, Star, Mail, Github, Linkedin, Lightbulb, MessageCircle } from 'lucide-react';
 
 const Home = () => {
   const tools = [
@@ -52,7 +52,7 @@ const Home = () => {
     {
       number: '01',
       title: 'Fill Details',
-      description: 'Enter your information or upload existing content',
+      description: 'Enter your information or upload your resume',
       icon: FileText,
     },
     {
@@ -66,6 +66,48 @@ const Home = () => {
       title: 'Apply & Succeed',
       description: 'Use your polished materials to land interviews',
       icon: Target,
+    },
+  ];
+
+  const openSourceInfo = [
+    {
+      title: 'Completely Free',
+      description: 'Open source project built by developers for developers',
+      icon: Github,
+    },
+    {
+      title: 'Transparent',
+      description: 'All code available on GitHub for community contributions',
+      icon: FileText,
+    },
+    {
+      title: 'Community Driven',
+      description: 'Your ideas and feedback shape the future of JobReach',
+      icon: Lightbulb,
+    },
+  ];
+
+  const contactLinks = [
+    {
+      icon: Mail,
+      label: 'Email',
+      href: 'mailto:support@jobreach.ai',
+      text: 'support@jobreach.ai',
+      color: 'hover:text-red-400',
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      href: 'https://github.com/Aishvaryasai05/JobReach-AI',
+      text: 'View Repository',
+      color: 'hover:text-slate-300',
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      href: 'https://linkedin.com',
+      text: 'Connect',
+      color: 'hover:text-blue-400',
     },
   ];
 
@@ -89,7 +131,7 @@ const Home = () => {
           >
             <div className="badge badge-violet">
               <span>✦</span>
-              <span>AI-Powered · Free to Use</span>
+              <span>AI-Powered · 100% Free & Open Source</span>
             </div>
           </motion.div>
 
@@ -120,14 +162,15 @@ const Home = () => {
             <Link to="/resume" className="btn-primary">
               Start Building
             </Link>
-            <button
-              onClick={() => {
-                document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="btn-secondary"
+            <a
+              href="https://github.com/Aishvaryasai05/JobReach-AI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary flex items-center justify-center gap-2"
             >
-              View All Tools
-            </button>
+              <Star size={18} className="fill-yellow-400 text-yellow-400" />
+              Star on GitHub
+            </a>
           </motion.div>
 
           {/* Scroll Indicator */}
@@ -139,6 +182,55 @@ const Home = () => {
             <ChevronDown className="text-violet-500/60" size={24} />
           </motion.div>
         </div>
+      </section>
+
+      {/* Open Source Section */}
+      <section className="section-wrapper py-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="space-y-8"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-center">Why Choose JobReach?</h2>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            variants={{
+              show: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {openSourceInfo.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.94 },
+                    show: {
+                      opacity: 1,
+                      scale: 1,
+                      transition: { duration: 0.4, ease: 'easeOut' },
+                    },
+                  }}
+                  className="glass-card p-6 text-center"
+                >
+                  <Icon className="text-cyan-400 mx-auto mb-4" size={40} />
+                  <h3 className="font-semibold text-white text-lg mb-2">{item.title}</h3>
+                  <p className="text-sm text-slate-400">{item.description}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Tools Grid */}
@@ -251,7 +343,93 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* CTA Section */}
+      {/* Community Contribution Section */}
+      <section className="section-wrapper py-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="glass-card p-8 md:p-12 space-y-8 text-center"
+        >
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Shape Our Future</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              JobReach is continuously evolving based on community feedback and ideas. Your suggestions, bug reports, and feature requests help us build better tools for everyone.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Report Issues */}
+            <motion.a
+              href="https://github.com/Aishvaryasai05/JobReach-AI/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              className="p-6 bg-gradient-to-br from-red-500/10 to-red-500/5 rounded-xl border border-red-500/20 hover:border-red-500/50 transition-all cursor-pointer"
+            >
+              <MessageCircle className="text-red-400 mx-auto mb-3" size={32} />
+              <h3 className="font-semibold text-white mb-2">Report Issues</h3>
+              <p className="text-sm text-slate-400">Found a bug? Let us know on GitHub</p>
+            </motion.a>
+
+            {/* Share Ideas */}
+            <motion.a
+              href="https://github.com/Aishvaryasai05/JobReach-AI/discussions"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              className="p-6 bg-gradient-to-br from-violet-500/10 to-violet-500/5 rounded-xl border border-violet-500/20 hover:border-violet-500/50 transition-all cursor-pointer"
+            >
+              <Lightbulb className="text-violet-400 mx-auto mb-3" size={32} />
+              <h3 className="font-semibold text-white mb-2">Share Ideas</h3>
+              <p className="text-sm text-slate-400">Have a feature idea? Discuss it with us</p>
+            </motion.a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="section-wrapper py-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="space-y-8"
+        >
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Get In Touch</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Have questions? Want to collaborate? Reach out to us through any of these channels.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {contactLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                  whileHover={{ scale: 1.05 }}
+                  className="glass-card p-6 text-center hover:border-violet-500/50 transition-all group cursor-pointer"
+                >
+                  <Icon className={`${link.color} mx-auto mb-3 transition-colors`} size={40} />
+                  <h3 className="font-semibold text-white mb-1">{link.label}</h3>
+                  <p className={`text-sm text-slate-400 group-hover:text-slate-300 transition-colors`}>
+                    {link.text}
+                  </p>
+                </motion.a>
+              );
+            })}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Final CTA Section */}
       <section className="section-wrapper py-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
