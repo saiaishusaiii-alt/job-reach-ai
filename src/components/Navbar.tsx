@@ -1,103 +1,87 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sparkles, Menu, X, Archive } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { savedOutputs } = useApp();
 
-  const navItems = [
+  const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/resume', label: 'Resume' },
+    { path: '/resume', label: 'CV Maker AI' },
     { path: '/coverletter', label: 'Cover Letter' },
-    { path: '/ats', label: 'ATS Check' },
-    { path: '/jdmatch', label: 'JD Match' },
-    { path: '/interview', label: 'Interview' },
+    { path: '/ats', label: 'ATS Checker' },
+    { path: '/jdmatch', label: 'JD Matcher' },
+    { path: '/interview', label: 'Interview Prep' },
     { path: '/saved', label: 'Saved' },
+    { path: '/auth', label: 'Sign In' }
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#04050f]/70 backdrop-blur-md border-b border-white/[0.06]">
-      <div className="section-wrapper flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center gap-2 font-bold text-lg gradient-text hover:opacity-80 transition-opacity"
-        >
-          <Sparkles className="text-violet-500" size={24} />
-          JobReach AI
-        </Link>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`px-4 py-2 rounded-lg transition-all duration-200 relative group ${
-                isActive(item.path)
-                  ? 'text-violet-400'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              {item.label}
-              {isActive(item.path) && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full"></div>
-              )}
-            </Link>
-          ))}
-        </div>
-
-        {/* Right Section */}
-        <div className="flex items-center gap-4">
-          {/* Saved Outputs Button */}
-          <Link
-            to="/saved"
-            className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm text-slate-300 hover:text-white transition-all"
-          >
-            <Archive size={16} />
-            <span className="font-medium">{savedOutputs.length}</span>
+    <nav className="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+      <div className="section-wrapper px-4 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-violet-500 to-cyan-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">JR</span>
+            </div>
+            <span className="font-bold text-xl hidden sm:inline">JobReach AI</span>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
-          >
-            {isOpen ? (
-              <X size={24} className="text-slate-300" />
-            ) : (
-              <Menu size={24} className="text-slate-300" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-[#04050f]/95 backdrop-blur border-b border-white/[0.06]">
-          <div className="section-wrapper py-4 space-y-2 flex flex-col">
-            {navItems.map((item) => (
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
               <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`px-4 py-2.5 rounded-lg transition-all ${
-                  isActive(item.path)
-                    ? 'bg-violet-500/20 text-violet-400'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                key={link.path}
+                to={link.path}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(link.path)
+                    ? 'text-violet-400'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
-                {item.label}
+                {link.label}
               </Link>
             ))}
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden text-white"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      )}
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <motion.div
+            className="lg:hidden mt-4 flex flex-col gap-4 pb-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(link.path)
+                    ? 'text-violet-400'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </div>
     </nav>
   );
 };
