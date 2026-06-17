@@ -14,6 +14,7 @@ import ATSChecker from './pages/ATSChecker';
 import JDMatcher from './pages/JDMatcher';
 import InterviewPrep from './pages/InterviewPrep';
 import SavedOutputs from './pages/SavedOutputs';
+import Auth from './pages/Auth';
 
 function AppContent() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function AppContent() {
               <Route path="/jdmatch" element={<JDMatcher />} />
               <Route path="/interview" element={<InterviewPrep />} />
               <Route path="/saved" element={<SavedOutputs />} />
+              <Route path="/auth" element={<Auth />} />
             </Routes>
           </AnimatePresence>
         </main>
