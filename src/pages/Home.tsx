@@ -1,231 +1,210 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { FileText, FileEdit, BarChart2, Target, MessageSquare, Archive, ChevronDown, Star, Mail, Github, Linkedin, Lightbulb, MessageCircle } from 'lucide-react';
+import { ArrowRight, Zap, FileText, Target, MessageSquare, Mic, Save, Github, Linkedin, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const tools = [
+  const navigate = useNavigate();
+
+  const features = [
     {
       icon: FileText,
-      name: 'Resume Builder',
-      description: 'Fill out your full professional profile and get a polished, ATS-ready resume in seconds.',
-      path: '/resume',
-      color: 'from-violet-500/20 to-cyan-500/10',
-    },
-    {
-      icon: FileEdit,
-      name: 'Cover Letter Generator',
-      description: 'Paste your resume + job description and get a tailored, compelling cover letter.',
-      path: '/coverletter',
-      color: 'from-cyan-500/20 to-pink-500/10',
-    },
-    {
-      icon: BarChart2,
-      name: 'ATS Compatibility Checker',
-      description: 'Check if your resume will pass Applicant Tracking Systems. Get a score + fixes.',
-      path: '/ats',
-      color: 'from-pink-500/20 to-violet-500/10',
-    },
-    {
-      icon: Target,
-      name: 'JD Matcher',
-      description: 'Paste a job description and see exactly how well your resume matches. Identify gaps.',
-      path: '/jdmatch',
-      color: 'from-violet-500/20 to-pink-500/10',
+      title: 'Resume Builder',
+      description: 'AI-powered resume generator with step-by-step wizard',
+      path: '/resume'
     },
     {
       icon: MessageSquare,
-      name: 'Interview Prep',
-      description: 'Get role-specific interview questions generated from your resume and target job.',
-      path: '/interview',
-      color: 'from-cyan-500/20 to-violet-500/10',
+      title: 'Cover Letter',
+      description: 'Tailored cover letters based on your resume',
+      path: '/coverletter'
     },
     {
-      icon: Archive,
-      name: 'Saved Outputs',
-      description: 'All your generated resumes, letters, and analyses saved locally.',
-      path: '/saved',
-      color: 'from-pink-500/20 to-cyan-500/10',
-    },
-  ];
-
-  const steps = [
-    {
-      number: '01',
-      title: 'Fill Details',
-      description: 'Enter your information or upload your resume',
-      icon: FileText,
-    },
-    {
-      number: '02',
-      title: 'AI Generates',
-      description: 'Claude AI creates tailored, professional content',
-      icon: FileEdit,
-    },
-    {
-      number: '03',
-      title: 'Apply & Succeed',
-      description: 'Use your polished materials to land interviews',
       icon: Target,
+      title: 'ATS Checker',
+      description: 'Score your resume and get improvement tips',
+      path: '/ats'
     },
+    {
+      icon: Zap,
+      title: 'JD Matcher',
+      description: 'Match resume against job descriptions',
+      path: '/jdmatch'
+    },
+    {
+      icon: Mic,
+      title: 'Interview Prep',
+      description: 'Get role-specific interview questions',
+      path: '/interview'
+    },
+    {
+      icon: Save,
+      title: 'Saved Outputs',
+      description: 'Access all your AI-generated content',
+      path: '/saved'
+    }
   ];
 
-  const openSourceInfo = [
-    {
-      title: 'Completely Free',
-      description: 'Open source project built by developers for developers',
-      icon: Github,
-    },
-    {
-      title: 'Transparent',
-      description: 'All code available on GitHub for community contributions',
-      icon: FileText,
-    },
-    {
-      title: 'Community Driven',
-      description: 'Your ideas and feedback shape the future of JobReach',
-      icon: Lightbulb,
-    },
+  const whyChooseItems = [
+    'AI-Powered Analysis',
+    'ATS Optimized',
+    'Instant Results',
+    'Professional Templates'
   ];
 
-  const contactLinks = [
-    {
-      icon: Mail,
-      label: 'Email',
-      href: 'mailto:support@jobreach.ai',
-      text: 'support@jobreach.ai',
-      color: 'hover:text-red-400',
-    },
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/Aishvaryasai05/JobReach-AI',
-      text: 'View Repository',
-      color: 'hover:text-slate-300',
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com',
-      text: 'Connect',
-      color: 'hover:text-blue-400',
-    },
-  ];
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="min-h-screen"
-    >
-      {/* Hero Section */}
-      <section className="section-wrapper pt-24 pb-16">
-        <div className="text-center space-y-6">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+    <div className="w-full min-h-screen text-white">
+      {/* Hero Section - Centered */}
+      <section className="min-h-screen flex items-center justify-center px-4">
+        <motion.div 
+          className="text-center max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Main Heading */}
+          <motion.h1 
+            className="text-5xl md:text-7xl font-bold mb-6 gradient-text"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 }}
-            className="inline-block"
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <div className="badge badge-violet">
-              <span>✦</span>
-              <span>AI-Powered · 100% Free & Open Source</span>
-            </div>
-          </motion.div>
+            Land Your Dream Job with AI
+          </motion.h1>
 
-          {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-4"
+          {/* Subtitle */}
+          <motion.p 
+            className="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
-              Land Your Dream Job with{' '}
-              <span className="gradient-text">AI</span>
-            </h1>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              5 intelligent tools that build your resume, write cover letters, optimize for
-              ATS, match job descriptions, and prepare you for interviews — all in one place.
-            </p>
-          </motion.div>
+            JobReach AI helps you create professional resumes, cover letters, and ace interviews using AI
+          </motion.p>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <Link to="/resume" className="btn-primary">
-              Start Building
-            </Link>
-            <a
-              href="https://github.com/Aishvaryasai05/JobReach-AI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary flex items-center justify-center gap-2"
+            <button 
+              onClick={() => navigate('/resume')}
+              className="btn-primary px-8 py-4 text-lg"
             >
-              <Star size={18} className="fill-yellow-400 text-yellow-400" />
-              Star on GitHub
-            </a>
+              Start Building Resume <ArrowRight size={20} />
+            </button>
+            <button 
+              onClick={() => navigate('/saved')}
+              className="btn-secondary px-8 py-4 text-lg"
+            >
+              View Saved Outputs
+            </button>
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex justify-center pt-8"
+          {/* Stats */}
+          <motion.div 
+            className="grid grid-cols-3 gap-4 max-w-md mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <ChevronDown className="text-violet-500/60" size={24} />
+            <div className="glass-card p-4">
+              <div className="text-2xl font-bold text-violet-400">5</div>
+              <div className="text-sm text-slate-400">AI Tools</div>
+            </div>
+            <div className="glass-card p-4">
+              <div className="text-2xl font-bold text-cyan-400">100%</div>
+              <div className="text-sm text-slate-400">ATS Ready</div>
+            </div>
+            <div className="glass-card p-4">
+              <div className="text-2xl font-bold text-pink-400">Instant</div>
+              <div className="text-sm text-slate-400">Results</div>
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Open Source Section */}
-      <section className="section-wrapper py-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+      {/* Spacing & Why Choose Section */}
+      <section className="py-24 px-4">
+        <motion.div 
+          className="section-wrapper"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          className="space-y-8"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center">Why Choose JobReach?</h2>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            variants={{
-              show: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            }}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            variants={fadeInUp}
           >
-            {openSourceInfo.map((item, index) => {
-              const Icon = item.icon;
+            Why Choose JobReach?
+          </motion.h2>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={staggerContainer}
+          >
+            {whyChooseItems.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                className="glass-card p-8 text-center hover:scale-105 transition-transform"
+                variants={fadeInUp}
+              >
+                <Zap className="w-8 h-8 text-violet-400 mx-auto mb-3" />
+                <p className="font-semibold text-lg">{item}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Spacing & 5 AI Powered Tools */}
+      <section className="py-24 px-4">
+        <motion.div 
+          className="section-wrapper"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            variants={fadeInUp}
+          >
+            5 AI Powered Tools
+          </motion.h2>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+          >
+            {features.map((feature, idx) => {
+              const Icon = feature.icon;
               return (
-                <motion.div
-                  key={item.title}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.94 },
-                    show: {
-                      opacity: 1,
-                      scale: 1,
-                      transition: { duration: 0.4, ease: 'easeOut' },
-                    },
-                  }}
-                  className="glass-card p-6 text-center"
+                <motion.div 
+                  key={idx}
+                  onClick={() => navigate(feature.path)}
+                  className="glass-card p-8 cursor-pointer hover:scale-105 transition-all duration-300 hover:border-violet-400/50"
+                  variants={fadeInUp}
                 >
-                  <Icon className="text-cyan-400 mx-auto mb-4" size={40} />
-                  <h3 className="font-semibold text-white text-lg mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-400">{item.description}</p>
+                  <Icon className="w-12 h-12 text-violet-400 mb-4" />
+                  <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                  <p className="text-slate-400">{feature.description}</p>
                 </motion.div>
               );
             })}
@@ -233,221 +212,138 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* Tools Grid */}
-      <section id="tools" className="section-wrapper py-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+      {/* Spacing & How It Works */}
+      <section className="py-24 px-4">
+        <motion.div 
+          className="section-wrapper"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          className="space-y-8"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center">5 AI-Powered Tools</h2>
-
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            variants={{
-              show: {
-                transition: {
-                  staggerChildren: 0.08,
-                  delayChildren: 0.1,
-                },
-              },
-            }}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            variants={fadeInUp}
           >
-            {tools.map((tool, index) => {
-              const Icon = tool.icon;
-              return (
-                <motion.div
-                  key={tool.name}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.94, y: 20 },
-                    show: {
-                      opacity: 1,
-                      scale: 1,
-                      y: 0,
-                      transition: { duration: 0.4, ease: 'easeOut' },
-                    },
-                  }}
-                >
-                  <Link
-                    to={tool.path}
-                    className="glass-card p-6 h-full flex flex-col hover:scale-105 transition-transform duration-300"
-                  >
-                    <div
-                      className={`bg-gradient-to-br ${tool.color} rounded-xl p-4 w-fit mb-4`}
-                    >
-                      <Icon className="text-cyan-400" size={28} />
-                    </div>
-                    <h3 className="font-semibold text-white text-lg mb-2">{tool.name}</h3>
-                    <p className="text-sm text-slate-400 mb-4 flex-1">{tool.description}</p>
-                    <span className="text-violet-400 font-medium text-sm hover:text-violet-300">
-                      Open Tool →
-                    </span>
-                  </Link>
-                </motion.div>
-              );
-            })}
+            How It Works
+          </motion.h2>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+          >
+            {[
+              { step: '1', title: 'Input Your Info', desc: 'Provide your background and experience' },
+              { step: '2', title: 'AI Processes', desc: 'Our AI analyzes and optimizes your content' },
+              { step: '3', title: 'Get Results', desc: 'Download, save, or share your materials' }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                className="glass-card p-8"
+                variants={fadeInUp}
+              >
+                <div className="text-4xl font-bold text-violet-400 mb-3">{item.step}</div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-slate-400">{item.desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </section>
 
-      {/* How It Works */}
-      <section className="section-wrapper py-16">
-        <motion.div
+      {/* Spacing & Shape Our Future */}
+      <section className="py-24 px-4">
+        <motion.div 
+          className="section-wrapper text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="space-y-8"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center">How It Works</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {steps.map((step, index) => {
-              const StepIcon = step.icon;
-              return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="glass-card p-8 text-center relative"
-                >
-                  {/* Step Number */}
-                  <div className="text-5xl font-bold gradient-text mb-4">{step.number}</div>
-
-                  {/* Icon */}
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-gradient-to-br from-violet-500/20 to-cyan-500/10 rounded-xl p-4 w-fit">
-                      <StepIcon className="text-violet-400" size={32} />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="font-semibold text-white text-lg mb-2">{step.title}</h3>
-                  <p className="text-sm text-slate-400">{step.description}</p>
-
-                  {/* Connector Line */}
-                  {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-violet-500 to-cyan-500"></div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Community Contribution Section */}
-      <section className="section-wrapper py-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="glass-card p-8 md:p-12 space-y-8 text-center"
-        >
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Shape Our Future</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              JobReach is continuously evolving based on community feedback and ideas. Your suggestions, bug reports, and feature requests help us build better tools for everyone.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Report Issues */}
-            <motion.a
-              href="https://github.com/Aishvaryasai05/JobReach-AI/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="p-6 bg-gradient-to-br from-red-500/10 to-red-500/5 rounded-xl border border-red-500/20 hover:border-red-500/50 transition-all cursor-pointer"
-            >
-              <MessageCircle className="text-red-400 mx-auto mb-3" size={32} />
-              <h3 className="font-semibold text-white mb-2">Report Issues</h3>
-              <p className="text-sm text-slate-400">Found a bug? Let us know on GitHub</p>
-            </motion.a>
-
-            {/* Share Ideas */}
-            <motion.a
-              href="https://github.com/Aishvaryasai05/JobReach-AI/discussions"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="p-6 bg-gradient-to-br from-violet-500/10 to-violet-500/5 rounded-xl border border-violet-500/20 hover:border-violet-500/50 transition-all cursor-pointer"
-            >
-              <Lightbulb className="text-violet-400 mx-auto mb-3" size={32} />
-              <h3 className="font-semibold text-white mb-2">Share Ideas</h3>
-              <p className="text-sm text-slate-400">Have a feature idea? Discuss it with us</p>
-            </motion.a>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="section-wrapper py-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="space-y-8"
-        >
-          <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Get In Touch</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              Have questions? Want to collaborate? Reach out to us through any of these channels.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {contactLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : '_self'}
-                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                  whileHover={{ scale: 1.05 }}
-                  className="glass-card p-6 text-center hover:border-violet-500/50 transition-all group cursor-pointer"
-                >
-                  <Icon className={`${link.color} mx-auto mb-3 transition-colors`} size={40} />
-                  <h3 className="font-semibold text-white mb-1">{link.label}</h3>
-                  <p className={`text-sm text-slate-400 group-hover:text-slate-300 transition-colors`}>
-                    {link.text}
-                  </p>
-                </motion.a>
-              );
-            })}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="section-wrapper py-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold">Ready to Land Your Dream Job?</h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Start with your resume and let AI help you every step of the way.
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-8 gradient-text"
+            variants={fadeInUp}
+          >
+            Shape Your Future Today
+          </motion.h2>
+          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+            Join thousands of job seekers who have successfully landed their dream jobs with AI-powered assistance.
           </p>
-          <Link to="/resume" className="btn-primary inline-block mt-4">
-            Get Started Free
-          </Link>
+          <button 
+            onClick={() => navigate('/resume')}
+            className="btn-primary px-12 py-4 text-lg"
+          >
+            Get Started Now <ArrowRight size={20} />
+          </button>
         </motion.div>
       </section>
-    </motion.div>
+
+      {/* Spacing & Get In Touch */}
+      <section className="py-24 px-4 border-t border-white/10">
+        <motion.div 
+          className="section-wrapper"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text"
+            variants={fadeInUp}
+          >
+            Get In Touch
+          </motion.h2>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            {/* Email */}
+            <motion.a 
+              href="mailto:aishwaryasai@gmail.com"
+              className="glass-card p-8 text-center hover:border-violet-400/50 transition-all"
+              variants={fadeInUp}
+            >
+              <Mail className="w-8 h-8 text-violet-400 mx-auto mb-3" />
+              <p className="font-semibold mb-1">Email</p>
+              <p className="text-slate-400 text-sm break-all">aishwaryasai@gmail.com</p>
+            </motion.a>
+
+            {/* LinkedIn */}
+            <motion.a 
+              href="https://linkedin.com/in/ayinam-aishvarya-s-5b9a86292"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card p-8 text-center hover:border-cyan-400/50 transition-all"
+              variants={fadeInUp}
+            >
+              <Linkedin className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
+              <p className="font-semibold mb-1">LinkedIn</p>
+              <p className="text-slate-400 text-sm">Your Profile</p>
+            </motion.a>
+
+            {/* GitHub */}
+            <motion.a 
+              href="https://github.com/saiaishusaiii-alt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card p-8 text-center hover:border-pink-400/50 transition-all"
+              variants={fadeInUp}
+            >
+              <Github className="w-8 h-8 text-pink-400 mx-auto mb-3" />
+              <p className="font-semibold mb-1">GitHub</p>
+              <p className="text-slate-400 text-sm">Open Source</p>
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-4 border-t border-white/10 text-center text-slate-400">
+        <p>© 2024 JobReach AI. Crafted with ❤️ for your career success.</p>
+      </footer>
+    </div>
   );
 };
 
